@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 80%;
+            margin: auto;
+        }
+        .grid img {
+            width: 100%;
+            height: 300px; /* Set a fixed height for all images */
+            object-fit: cover; /* Ensure images cover the area without distortion */
+            border-radius: 8px;
+        }
+        .konten {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center; /* Center the text */
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        .short-video {
+            width: 100%;  /* set the width you prefer for short video */
+            height: 500px; /* set the height you prefer for short video */
+            object-fit: cover; /* Ensure images cover the area without distortion */
+            border-radius: 8px;
+        }.video {
+            width: 330px;  /* set the width you prefer for video */
+            height: 210px; /* set the height you prefer for  video */
+            object-fit: cover; /* Ensure images cover the area without distortion */
+            border-radius: 8px;
+        }
+        .navbar {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar ul li {
+    float: left;
+}
+
+.navbar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar ul li a:hover {
+    background-color: #ff0303;
+    color: black;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+}
+
+/* Responsive Navbar */
+@media (max-width: 600px) {
+    .navbar ul {
+        flex-direction: column;
+        display: none;
+        width: 100%;
+        text-align: left;
+    }
+
+    .navbar ul.show {
+        display: flex;
+    }
+
+    .navbar ul li {
+        width: 100%;
+    }
+
+    .navbar ul li a {
+        padding: 10px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+/* Sidebar styling */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    z-index: 1;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar ul li:hover {
+    background-color: #575757;
+}
+
+.sidebar.show {
+    width: 250px;
+}
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+}
+
+/* Sidebar styling */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    z-index: 1;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar ul li:hover {
+    background-color: #575757;
+}
+
+.sidebar.show {
+    width: 250px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 600px) {
+    .hamburger {
+        display: flex;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#home" style="color:white; text-decoration:none;">Logo</a>
+        </div>
+        <ul id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+    <audio id="background-music" src="NDX_A.K.A__-_KELINGAN_MANTAN___HIBURLAND__PDKT_FEST_(128k).m4a" autoplay loop muted></audio>
+    <div class="content">
+        <main class="grid">
+            <div>
+                <a href="Kartun Hepi.jpg" download="Kartun Hepi">
+                    <img src="Kartun Hepi.jpg" alt="Kartun Hepi">
+                </a>
+                <div class="konten">
+                    <h2>Kartun Hepi</h2>
+                    <p>This is a happy cartoon image.</p>
+                    <a href="https://affiliate-link1.com" target="_blank">Buy Here</a>
+                </div>
+            </div>
+            <div>
+                <a href="kucing.jpg" download="Kucing">
+                    <img src="kucing.jpg" alt="Kucing">
+                </a>
+                <div class="konten">
+                    <h2>Kucing</h2>
+                    <p>This is an image of a cat.</p>
+                    <a href="https://affiliate-link2.com" target="_blank">Buy Here</a>
+                </div>
+            </div>
+            <!-- New video section -->
+            <div>
+                <video class="short-video" controls>
+                    <source src="aduhh mbak tanti senyumnyaa.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="konten">
+                    <h2>My Video</h2>
+                    <p>This is a sample video.</p>
+                    <a href="https://affiliate-link3.com" target="_blank">Buy Here</a>
+                </div>
+            </div>
+            <!-- New video panjang -->
+            <div>
+                <video class="video" controls>
+                    <source src="EDM Showcase 2024 by DJ MINT (from Vientiane, Laos).mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="konten">
+                    <h2>EDM Showcase 2024 by DJ MINT (from Vientiane, Laos)</h2>
+                    <p>This is a sample video.</p>
+                    <a href="https://affiliate-link3.com" target="_blank">Buy Here</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        function toggleMenu() {
+            var navLinks = document.getElementById("nav-links");
+            navLinks.classList.toggle("show");
+        }
+    </script>
+</body>
+</html>
